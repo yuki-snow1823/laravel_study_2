@@ -28,6 +28,7 @@
                         @yield('code')
                     </div>
 
+                    {{-- yieldで呼び出している --}}
                     <div class="ml-4 text-lg text-gray-500 uppercase tracking-wider">
                         @yield('message')
                     </div>
