@@ -19,7 +19,13 @@ use App\Http\Middleware\HelloMiddleware;
 // Route::get('/hello/{id}','App\Http\Controllers\HelloController@index')->where('id', '[0-9]+');
 // Route::get('/hello/other', 'App\Http\Controllers\HelloController@other');
 
-Route::middleware([HelloMiddleware::class])->group(function () {
-    Route::get('/hello', 'App\Http\Controllers\HelloController@index');
-    Route::get('/hello/other', 'App\Http\Controllers\ZHelloController@other');
+// Route::middleware([HelloMiddleware::class])->group(function () {
+//     Route::get('/hello', 'App\Http\Controllers\HelloController@index');
+//     Route::get('/hello/other', 'App\Http\Controllers\ZHelloController@other');
+// });
+
+// 上一個決めれば下が全部書くのが楽になる
+Route::namespace('App\Http\Controllers\Sample')->group(function() {
+    Route::get('/sample', 'SampleController@index');
+    Route::get('/sample/other', 'SampleController@other');
 });
