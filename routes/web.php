@@ -29,3 +29,5 @@ Route::namespace('App\Http\Controllers\Sample')->group(function() {
     Route::get('/sample', 'SampleController@index');
     Route::get('/sample/other', 'SampleController@other');
 });
+
+Route::get('/hello/{person}', 'App\Http\Controllers\HelloController@index');
