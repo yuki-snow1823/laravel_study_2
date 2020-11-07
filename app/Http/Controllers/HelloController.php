@@ -1,29 +1,19 @@
 <?php
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Models\Person;
 
 class HelloController extends Controller
 {
-    // モデルを指定しなくても同じ名前にするだけで、インスタンスが入る
-    public function index($nandemoii)
+    public function index()
     {
+        $sample_msg = config('sample.message');
+        $sample_data = config('sample.data');
         $data = [
-        'msg'=>$nandemoii,
-        "name" => config("app.name")
+            'msg'=> $sample_msg,
+            'data'=> $sample_data
         ];
         return view('hello.index', $data);
     }
 
 
-
-    public function other(Request $request)
-    {
-        // middlewareの設定したものを呼び出している
-        $data = [
-            'msg'=>$request->bye,
-        ];
-        return view('hello.index', $data);
-    }
 }

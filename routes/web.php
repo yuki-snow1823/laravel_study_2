@@ -30,4 +30,4 @@ Route::namespace('App\Http\Controllers\Sample')->group(function() {
     Route::get('/sample/other', 'SampleController@other');
 });
 
-Route::get('/hello/{person}', 'App\Http\Controllers\HelloController@index');
+Route::get('/hello', 'App\Http\Controllers\HelloController@index');
