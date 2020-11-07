@@ -6,7 +6,8 @@ use App\Models\Person;
 
 class HelloController extends Controller
 {
-    public function index(Person $person)
+    // モデルを指定しなくても同じ名前にするだけで、インスタンスが入る
+    public function index($person)
     {
         $data = [
         'msg'=>$person,
