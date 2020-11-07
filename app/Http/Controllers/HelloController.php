@@ -7,11 +7,12 @@ use App\Models\Person;
 class HelloController extends Controller
 {
     // モデルを指定しなくても同じ名前にするだけで、インスタンスが入る
-    public function index($person)
+    public function index($nandemoii)
     {
         $data = [
-        'msg'=>$person,
-    ];
+        'msg'=>$nandemoii,
+        "name" => config("app.name")
+        ];
         return view('hello.index', $data);
     }
 
