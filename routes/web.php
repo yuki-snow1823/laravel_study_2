@@ -31,3 +31,9 @@ Route::namespace('App\Http\Controllers\Sample')->group(function() {
 });
 
 Route::get('/hello', 'App\Http\Controllers\HelloController@index');
+
+// Route::get('/hello', 'HelloController@index');
+Route::get('/hello/other', 'App\Http\Controllers\HelloController@other');
+
+
+Route::get('/sample', 'App\Http\Controllers\Sample\SampleController@index')->name('sample');
