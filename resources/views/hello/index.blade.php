@@ -12,4 +12,3 @@
 th { background-color:red; padding:10px; }
 td { background-color:#eee; padding:10px; }
 </style>
-
