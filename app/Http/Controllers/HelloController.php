@@ -30,7 +30,8 @@ public function index()
     
 public function other(Request $request)
 {
-    Storage::disk('local')->putFile('files', $request->file('file'));
+    $ext = "." . $request->file("file")->extension();
+    Storage::disk('local')->putFileAs('files', $request->file('file'), "uploaded". $ext); // ここで名前を指定
     return redirect()->route('hello');
 
 
