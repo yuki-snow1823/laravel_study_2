@@ -39,10 +39,16 @@ public function index()
     return view('hello.index', $data);
 }
     
-    public function other($msg)
-    {
-        Storage::disk('public')->prepend($this->fname, $msg);
-        return redirect()->route('hello');
-    }    
+public function other($msg)
+{
+    Storage::disk('public')->delete('bk_' . $this->fname);
+    Storage::disk('public')->copy($this->fname, 
+        'bk_' . $this->fname);
+    Storage::disk('local')->delete('bk_' . $this->fname);
+    Storage::disk('local')->move('public/bk_' . $this->fname, 
+        'bk_' . $this->fname);
+    
+    return redirect()->route('hello');
+} 
     
 }
