@@ -41,14 +41,21 @@ public function index()
     
 public function other($msg)
 {
-    Storage::disk('public')->delete('bk_' . $this->fname); // 消す
-    Storage::disk('public')->copy($this->fname,  // コピーして別名で動かす
+    if (Storage::disk('public')->exists('bk_' . $this->fname))
+    {
+        Storage::disk('public')->delete('bk_' . $this->fname);
+    }
+    Storage::disk('public')->copy($this->fname, 
         'bk_' . $this->fname);
-    Storage::disk('local')->delete('bk_' . $this->fname);
+    if (Storage::disk('local')->exists('bk_' . $this->fname))
+    {
+        Storage::disk('local')->delete('bk_' . $this->fname);
+    }
     Storage::disk('local')->move('public/bk_' . $this->fname, 
         'bk_' . $this->fname);
     
     return redirect()->route('hello');
-} 
+}   
+
     
 }
