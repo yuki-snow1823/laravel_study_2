@@ -27,10 +27,9 @@ class HelloController extends Controller
     }
 
 
-    public function other($msg)
-    {
-        $data = Storage::get($this->fname) . PHP_EOL . $msg;
-        Storage::put($this->fname, $data);
-        return redirect()->route('hello');
-    }
+public function other($msg)
+{
+    Storage::append($this->fname, $msg);
+    return redirect()->route('hello');
+}
 }
