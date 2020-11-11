@@ -1,7 +1,10 @@
 <?php
 namespace App\Http\Controllers;
-use Symfony\Component\HttpFoundation\Request;
+// use Symfony\Component\HttpFoundation\Request;
 use Illuminate\Support\Facades\Storage;        // 追加
+
+use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 
 class HelloController extends Controller
@@ -15,14 +18,17 @@ class HelloController extends Controller
     }
 
 
-public function index()
+
+// アクセスしたらアクセス、リクエストがポストなら投稿処理、だから同じルーティングでいける
+public function index(Request $request)
 {
-    $dir = '/';
-    $all = Storage::disk('logs')->allfiles($dir);
-    
+    $msg = 'please input text:';
+    if ($request->isMethod('post'))
+    {
+        $msg = 'you typed: "' . $request->input('msg') . '"';
+    }
     $data = [
-        'msg'=> 'DIR: ' . $dir,
-        'data'=> $all
+        'msg'=> $msg,
     ];
     return view('hello.index', $data);
 }
