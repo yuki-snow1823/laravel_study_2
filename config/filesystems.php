@@ -41,6 +41,7 @@ return [
     |
     */
 
+    // diskの設定
     'disks' => [
 
         'local' => [
