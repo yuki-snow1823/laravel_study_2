@@ -19,16 +19,21 @@ class HelloController extends Controller
 
 
 
-// アクセスしたらアクセス、リクエストがポストなら投稿処理、だから同じルーティングでいける
 public function index(Request $request)
 {
     $msg = 'please input text:';
+    $keys = [];
+    $values = [];
     if ($request->isMethod('post'))
     {
-        $msg = 'you typed: "' . $request->input('msg') . '"';
+        $form = $request->all();
+        $keys = array_keys($form);
+        $values = array_values($form);
     }
     $data = [
         'msg'=> $msg,
+        'keys' => $keys,
+        'values' => $values,
     ];
     return view('hello.index', $data);
 }
