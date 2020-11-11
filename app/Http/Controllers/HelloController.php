@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Storage;        // 追加
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Log;
 
 
 class HelloController extends Controller
@@ -26,21 +27,22 @@ public function index(Request $request, Response $response)
     $values = [];
     if ($request->isMethod('post'))
     {
-        $form = $request->all();
-        $result = '<html><body>';
-        foreach($form as $key => $value)
-        {
-            $result .= $key . ': ' . $value . "<br>";
-        }
-        $result .= '</body></html>';
-        $response->setContent($result);
-        // htmlのbodyにしてるって感じか
-        return $response;
+        $form = $request->only(['name', 'mail']);
+        Log::warning($form);
+        // 配列として入る
+        $keys = array_keys($form);
+        $values = array_values($form);
+        $data = [
+            'msg'=>'you inputted.',
+            'keys'=>$keys,
+            'values'=>$values,
+        ];
+        return view('hello.index', $data);
     }
     $data = [
         'msg'=> $msg,
-        'keys' => $keys,
-        'values' => $values,
+        'keys'=>$keys,
+        'values'=>$values,
     ];
     return view('hello.index', $data);
 }
