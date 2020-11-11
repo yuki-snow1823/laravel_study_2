@@ -19,7 +19,7 @@ class HelloController extends Controller
 
 
 
-public function index(Request $request)
+public function index(Request $request, Response $response)
 {
     $msg = 'please input text:';
     $keys = [];
@@ -27,8 +27,15 @@ public function index(Request $request)
     if ($request->isMethod('post'))
     {
         $form = $request->all();
-        $keys = array_keys($form);
-        $values = array_values($form);
+        $result = '<html><body>';
+        foreach($form as $key => $value)
+        {
+            $result .= $key . ': ' . $value . "<br>";
+        }
+        $result .= '</body></html>';
+        $response->setContent($result);
+        // htmlのbodyにしてるって感じか
+        return $response;
     }
     $data = [
         'msg'=> $msg,
@@ -37,6 +44,7 @@ public function index(Request $request)
     ];
     return view('hello.index', $data);
 }
+
 
     
 public function other(Request $request)
