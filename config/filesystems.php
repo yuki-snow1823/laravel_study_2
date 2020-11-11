@@ -55,6 +55,13 @@ return [
             'url' => env('APP_URL') . '/storage/logs',
         ],
 
+        'ftp' => [
+            'driver'   => 'ftp',
+            'host'     => 'ホスト名',
+            'username' => "利用者名",
+            'password' => "パスワード",
+        ],
+
 
         'public' => [
             'driver' => 'local',
