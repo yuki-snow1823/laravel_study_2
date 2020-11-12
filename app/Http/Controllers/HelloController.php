@@ -27,16 +27,17 @@ public function index(Request $request, Response $response)
     $values = [];
     if ($request->isMethod('post'))
     {
-        $form = $request->only(['name', 'mail']);
-        Log::warning($form);
-        // 配列として入る
+        $form = $request->only(['name', 'mail', 'tel']);
         $keys = array_keys($form);
         $values = array_values($form);
+        $msg =  old('name') . ', ' . old('mail') 
+                . ', ' . old('tel');
         $data = [
-            'msg'=>'you inputted.',
-            'keys'=>$keys,
-            'values'=>$values,
+            'msg' => $msg,
+            'keys' => $keys,
+            'values' => $values,
         ];
+        $request->flash();
         return view('hello.index', $data);
     }
     $data = [
@@ -44,6 +45,8 @@ public function index(Request $request, Response $response)
         'keys'=>$keys,
         'values'=>$values,
     ];
+        
+    $request->flash();
     return view('hello.index', $data);
 }
 
