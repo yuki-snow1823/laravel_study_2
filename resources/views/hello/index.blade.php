@@ -1,6 +1,7 @@
 <body>
     <h1>Hello/Index</h1>
     <p>{!!$msg!!}</p>
+    {{-- 変数として中身が出力される --}}
 <form action="/hello" method="get">
     @csrf
     <div>NAME:<input type="text" name="name" value="{{old('name')}}"></div>

@@ -10,45 +10,41 @@ use Illuminate\Support\Facades\Log;
 
 class HelloController extends Controller
 {
-    private $fname;
 
 
-    public function __construct()
+    public function index(Request $request, Response $response)
     {
-        $this->fname = 'hello.txt';
+        $name = $request->query('name');
+        $mail = $request->query('mail');
+        $tel = $request->query('tel');
+        $msg = $request->query('msg');
+        $keys = ['名前','メール','電話'];
+        $values = [$name, $mail, $tel];
+        $data = [
+            'msg'=> $msg,
+            'keys'=>$keys,
+            'values'=>$values,
+        ];
+        $request->flash();
+        // 過去に入れた値を残す
+
+
+        return view('hello.index', $data);
     }
 
 
-
-public function index(Request $request, Response $response)
-{
-    $name = $request->query('name');
-    $mail = $request->query('mail');
-    $tel = $request->query('tel');
-    $msg = $name . ', ' . $mail . ', ' . $tel;
-    $keys = ['名前','メール','電話'];
-    $values = [$name, $mail, $tel];
-    $data = [
-        'msg'=> $msg,
-        'keys'=>$keys,
-        'values'=>$values,
-    ];
-    $request->flash();
-    return view('hello.index', $data);
-}
-
-
-    
-public function other(Request $request)
-{
-    $ext = "." . $request->file("file")->extension();
-    Storage::disk('local')->putFileAs('files', $request->file('file'), "uploaded". $ext); // ここで名前を指定
-    return redirect()->route('hello');
-
-
-}
-
-
-
+    public function other()
+    {
+        // ダミーデータ
+        $data = [
+            'name' => 'Taro',
+            'mail' => 'taro@yamada',
+            'tel' => '090-999-999',
+        ];
+        $query_str = http_build_query($data);
+        $data['msg'] = $query_str;
+        // データを持ったままリダイレクトしてRouteにいく。
+        return redirect()->route('hello', $data);
+    }
     
 }
