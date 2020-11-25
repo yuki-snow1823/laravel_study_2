@@ -9,15 +9,17 @@ class HelloController extends Controller
 {
 
 
-    public function index(MyService $myservice) // インスタンスが入る、作られる
-    {
-        $data = [
-            'msg'=> $myservice->say(),
-            'data'=> $myservice->data()
-        ];
-        return view('hello.index', $data);
-    }
-    
+public function index(int $id = -1)
+{
+    $myservice = app()->makeWith('App\MyClasses\MyService', 
+            ['id' => $id]);
+    $data = [
+        'msg'=> $myservice->say($id),
+        'data'=> $myservice->alldata()
+    ];
+    return view('hello.index', $data);
+}
+
 
 
 
