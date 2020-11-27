@@ -3,15 +3,17 @@ namespace App\MyClasses;
 
 
 class MyService
-{
-    
+{  
+    private $serial;
     private $id = -1;
     private $msg = 'no id...';
     private $data = ['Hello', 'Welcome', 'Bye'];
 
 
-    public function __construct()
-    {
+    function __construct()
+    { // ランダムなコンストラクト
+        $this->serial = rand();
+        echo "「" . $this->serial . "」";
     }
 
 
@@ -42,5 +44,5 @@ class MyService
     {
         return $this->data;
     }
+    
 }
-
