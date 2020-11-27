@@ -10,11 +10,12 @@ class MyService
     private $data = ['Hello', 'Welcome', 'Bye'];
 
 
-    function __construct()
-    {
-        $this->serial = rand();
-        echo "「" . $this->serial . "」";
-    }
+function __construct(int $id) // コンストラクタに引数
+{
+    $this->setId($id);
+    $this->serial = rand();
+    echo "「" . $this->serial . "」";
+}
 
 
     public function setId($id)
