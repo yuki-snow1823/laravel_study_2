@@ -7,32 +7,20 @@ use App\MyClasses\MyService;
 
 class HelloController extends Controller
 {
-
-
-public function index(MyService $myservice, int $id = -1)
-{
-    $myservice->setId($id);
-    $data = [
-        'msg'=> $myservice->say($id),
-        'data'=> $myservice->alldata()
-    ];
-    return view('hello.index', $data);
-}
-
-
-
-    public function other()
+    function __construct(MyService $myservice)
     {
-        // ダミーデータ
+        $myservice = app('App\MyClasses\MyService');
+    }
+
+
+    public function index(MyService $myservice, int $id = -1)
+    {
+        $myservice->setId($id);
         $data = [
-            'name' => 'Taro',
-            'mail' => 'taro@yamada',
-            'tel' => '090-999-999',
+            'msg'=> $myservice->say($id),
+            'data'=> $myservice->alldata()
         ];
-        $query_str = http_build_query($data);
-        $data['msg'] = $query_str;
-        // データを持ったままリダイレクトしてRouteにいく。
-        return redirect()->route('hello', $data);
+        return view('hello.index', $data);
     }
     
 }

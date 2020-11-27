@@ -11,7 +11,7 @@ class MyService
 
 
     function __construct()
-    { // ランダムなコンストラクト
+    {
         $this->serial = rand();
         echo "「" . $this->serial . "」";
     }

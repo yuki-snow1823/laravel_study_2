@@ -25,17 +25,12 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        config([
-            'sample.data'=>['こんにちは', 'どうも', 'さようなら']
-        ]);
-
-        app()->bind(
-            'App\MyClasses\MyService',
-            function ($app) {
-                $myservice = new MyService();
-                $myservice->setId(0); // デフォ
-                return $myservice;
-            }
-        );
+        app()->bind('App\MyClasses\MyService', 
+                function ($app) {
+            $myservice = new MyService();
+            $myservice->setId(0);
+            return $myservice;
+        });
     }
+
 }
