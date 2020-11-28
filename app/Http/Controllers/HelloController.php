@@ -7,9 +7,6 @@ use App\MyClasses\MyServiceInterface;        // 追加
 
 class HelloController extends Controller
 {
-    function __construct()
-    {
-    }
 
 
     public function index(MyServiceInterface $myservice, int $id = -1)
