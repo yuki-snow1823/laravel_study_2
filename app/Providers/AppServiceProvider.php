@@ -37,6 +37,7 @@ public function boot()
         
     });
     
+    // このサービスが呼ばれたときにのみこうする
     app()->resolving(PowerMyService::class, function ($obj, $app) {
         $newdata = ['ハンバーグ','カレーライス','唐揚げ','餃子'];
         $obj->setData($newdata);
