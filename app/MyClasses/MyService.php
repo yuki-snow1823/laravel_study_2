@@ -2,7 +2,7 @@
 namespace App\MyClasses;
 
 
-class MyService
+class MyService implements MyServiceInterface
 {  
     private $serial;
     private $id = -1;
