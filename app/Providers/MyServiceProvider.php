@@ -10,10 +10,13 @@ class MyServiceProvider extends ServiceProvider
 {
     public function register()
     {
+        app()->singleton('myservice',
+            'App\MyClasses\PowerMyService');
         app()->singleton('App\MyClasses\MyServiceInterface',
             'App\MyClasses\PowerMyService');
         echo "<b>＜MyServiceProvider/register＞</b><br>";
     }
+
 
 
     public function boot()
