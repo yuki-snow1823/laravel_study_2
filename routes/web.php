@@ -48,3 +48,11 @@ Route::get('/hello/other', 'App\Http\Controllers\HelloController@other');
 // Route::get('/hello', 'App\Http\Controllers\HelloController@index')->name('hello');
 
 Route::get('/hello/{id}', 'App\Http\Controllers\HelloController@index');
+
+
+Route::get('/hello', 'App\Http\Controllers\HelloController@index')
+    ->middleware(App\Http\Middleware\MyMiddleware::class);
+
+
+Route::get('/hello/{id}', 'App\Http\Controllers\HelloController@index')
+    ->middleware(App\Http\Middleware\MyMiddleware::class);
