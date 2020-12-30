@@ -3,9 +3,8 @@
     <p>{{$msg}}</p>
     <ol>
     @foreach($data as $item)
-    {{-- <li>{{$item->name}} [{{$item->mail}}, 
-        {{$item->age}}]</li> --}}
-        {{ $item->Name }}
+    <li>{{$item->name}} [{{$item->mail}}, 
+        {{$item->age}}]</li>
     @endforeach
     </ol>
     <hr>

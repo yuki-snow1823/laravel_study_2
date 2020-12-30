@@ -12,19 +12,20 @@ class HelloController extends Controller
 {
 
 
-public function index()
+public function index($id)
 {
-    $data = ['msg' => '', 'data' => []];
-    $msg = 'get: ';
-    $result = DB::table('people')->orderBy('name', 'asc')
-        ->first();
-        // dd($result);
+    $msg = 'show page: ' . $id;
+    $result = DB::table('people')
+        ->paginate(3, ['*'], 'page', $id);
+
+
     $data = [
         'msg' => $msg,
         'data' => $result,
     ];
     return view('hello.index', $data);
 }
+
 
     
     
