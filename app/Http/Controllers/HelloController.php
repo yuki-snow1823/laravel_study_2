@@ -16,22 +16,9 @@ public function index()
 {
     $data = ['msg' => '', 'data' => []];
     $msg = 'get: ';
-    $result = [];
-    DB::table('people')
-        ->chunkById(3, function($items) use (&$msg, &$result)
-    {
-        foreach($items as $item)
-        {   
-            // dd($item->Id);
-
-            $msg .= $item->Id . ' ';
-            $result += array_merge($result, [$item]);
-            // dump($result);
-            break;
-        }
-        return true;
-    });
-
+    $result = DB::table('people')->orderBy('name', 'asc')
+        ->first();
+        // dd($result);
     $data = [
         'msg' => $msg,
         'data' => $result,
