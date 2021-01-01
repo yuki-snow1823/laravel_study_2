@@ -11,6 +11,7 @@
         <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
 
         <!-- Styles -->
+        <link href="/resources/css/app.css"  rel="stylesheet">
         <style>
             html, body {
                 background-color: #fff;

@@ -7,16 +7,18 @@ use App\Facades\MyService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
+use App\Models\Person;
+
 
 class HelloController extends Controller
 {
 
-
-public function index($id)
+public function index(Request $request)
 {
+    $id = $request->query('page');
     $msg = 'show page: ' . $id;
-    $result = DB::table('people')
-        ->paginate(3, ['*'], 'page', $id);
+    $result = Person::paginate(3);
+
 
 
     $data = [
