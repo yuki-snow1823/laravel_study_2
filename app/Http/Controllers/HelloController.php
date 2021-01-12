@@ -17,17 +17,24 @@ class HelloController extends Controller
 
 public function index(Request $request)
 {
-    $id = $request->query('page');
-    $msg = 'show page: ' . $id;
-    $result = Person::paginate(3);
-    $paginator = new MyPaginator($result);
+    $msg = 'show people record.';
+    $keys = Person::get()->modelKeys(); // keyを取得
+
+    $even = array_filter($keys, function($key)
+        {
+            return $key % 2 == 0;
+        });
+
+    // 2で割り切れるidのものをfilterしてる？のみかな
+    $result = Person::get()->only($even); // id指定
+    
     $data = [
         'msg' => $msg,
         'data' => $result,
-        'paginator' => $paginator,
     ];
     return view('hello.index', $data);
 }
+
 
 
     
