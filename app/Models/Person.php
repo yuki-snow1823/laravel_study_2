@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
@@ -13,26 +14,35 @@ class Person extends Model
     }
 
     public function getNameAndIdAttribute()
-{
-    return $this->name . ' [id=' . $this->id . ']';
-}
+    {
+        return $this->name . ' [id=' . $this->id . ']';
+    }
 
 
-public function getNameAndMailAttribute()
-{
-    return $this->name . ' (' . $this->mail . ')';
-}
+    public function getNameAndMailAttribute()
+    {
+        return $this->name . ' (' . $this->mail . ')';
+    }
 
 
-public function getNameAndAgeAttribute()
-{
-    return $this->name . '(' . $this->age . ')';
-}
-public function getAllDataAttribute()
-{
-    return $this->name . '(' . $this->age . ')'
-        . ' [' . $this->mail . ']';
-}
+    public function getNameAndAgeAttribute()
+    {
+        return $this->name . '(' . $this->age . ')';
+    }
+    public function getAllDataAttribute()
+    {
+        return $this->name . '(' . $this->age . ')'
+            . ' [' . $this->mail . ']';
+    }
+
+    protected $guarded = ['id'];
+
+// ミューてた
+    public static $rules = [
+        'name' => 'required',
+        'mail' => 'email',
+        'age' => 'integer',
+    ];
 }
 
 

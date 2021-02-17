@@ -37,6 +37,15 @@ public function index(Request $request)
     return view('hello.index', $data);
 }
 
+// どこからくるの。URLか。
+public function save($id, $name)
+{
+    $record = Person::find($id);
+    $record->name = $name;
+    $record->save();
+    return redirect()->route('hello');
+}
+
 
 
     
