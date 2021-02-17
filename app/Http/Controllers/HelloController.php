@@ -7,8 +7,10 @@ use App\Facades\MyService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-use App\Models\Person;
+use App\Models\User;
 use App\Http\Pagination\MyPaginator;
+use App\Models\Person;
+
 
 
 class HelloController extends Controller

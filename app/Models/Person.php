@@ -1,26 +1,46 @@
 <?php
-
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Symfony\Component\HttpFoundation\Request;
+use Illuminate\Database\Eloquent\Collection;
+
 
 class Person extends Model
 {
-    use HasFactory;
-    // やっぱり予約語なのかな？特別な変数なのかもしれない
-    // protected $table = "hoge";
+    public function newCollection(array $models = [])
+    {
+        return new MyCollection($models);
+    }
 
-
-    public function index(Request $request)
-{    
-    $msg = 'show people record.';
-    $result = Person::get(); // 何をgetしてるの？全部？
-    $data = [
-        'msg' => $msg,
-        'data' => $result,
-    ];
-    return view('hello.index', $data);
+    public function getNameAndIdAttribute()
+{
+    return $this->name . ' [id=' . $this->id . ']';
 }
+
+
+public function getNameAndMailAttribute()
+{
+    return $this->name . ' (' . $this->mail . ')';
+}
+
+
+public function getNameAndAgeAttribute()
+{
+    return $this->name . '(' . $this->age . ')';
+}
+public function getAllDataAttribute()
+{
+    return $this->name . '(' . $this->age . ')'
+        . ' [' . $this->mail . ']';
+}
+}
+
+
+class MyCollection extends Collection
+{
+    public function fields()
+    {
+        $item = $this->first();
+        return array_keys($item->toArray());
+    }
 }
