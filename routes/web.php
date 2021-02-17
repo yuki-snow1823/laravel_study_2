@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 // use App\Http\Controllers\HelloController;
 use App\Http\Middleware\HelloMiddleware;
 
-Route::get('/hello/{id}/{name}', 'App\Http\Controllers\HelloController@save');
+// Route::get('/hello/{id}/{name}', 'App\Http\Controllers\HelloController@save');
 
 
 
@@ -30,6 +30,9 @@ Route::get('/hello/{id}', 'App\Http\Controllers\HelloController@index');
 
 Route::get('/hello', 'App\Http\Controllers\HelloController@index')
     ->middleware('MyMW')->name("hello");
+
+Route::get('/hello/json', 'App\Http\Controllers\HelloController@json');
+Route::get('/hello/json/{id}', 'App\Http\Controllers\HelloController@json');
 
 
 

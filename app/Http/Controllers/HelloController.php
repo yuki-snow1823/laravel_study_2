@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers;
 
 
@@ -17,37 +18,40 @@ class HelloController extends Controller
 {
 
 
-public function index(Request $request)
-{
-    $msg = 'show people record.';
-    $keys = Person::get()->modelKeys(); // keyを取得
+    public function index(Request $request)
+    {
+        $msg = 'show people record.';
+        $keys = Person::get()->modelKeys(); // keyを取得
 
-    $even = array_filter($keys, function($key)
-        {
+        $even = array_filter($keys, function ($key) {
             return $key % 2 == 0;
         });
 
-    // 2で割り切れるidのものをfilterしてる？のみかな
-    $result = Person::get()->only($even); // id指定
-    
-    $data = [
-        'msg' => $msg,
-        'data' => $result,
-    ];
-    return view('hello.index', $data);
-}
+        // 2で割り切れるidのものをfilterしてる？のみかな
+        $result = Person::get()->only($even); // id指定
 
-// どこからくるの。URLか。
-public function save($id, $name)
-{
-    $record = Person::find($id);
-    $record->name = $name;
-    $record->save();
-    return redirect()->route('hello');
-}
+        $data = [
+            'msg' => $msg,
+            'data' => $result,
+        ];
+        return view('hello.index', $data);
+    }
 
+    // どこからくるの。URLか。
+    public function save($id, $name)
+    {
+        $record = Person::find($id);
+        $record->name = $name;
+        $record->save();
+        return redirect()->route('hello');
+    }
 
-
-    
-    
+    public function json($id = -1)
+    {
+        if ($id == -1) {
+            return Person::get()->toJson();
+        } else {
+            return Person::find($id)->toJson();
+        }
+    }
 }
