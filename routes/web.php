@@ -9,9 +9,9 @@ use App\Http\Middleware\HelloMiddleware;
 
 
 // 上一個決めれば下が全部書くのが楽になる
-Route::namespace('App\Http\Controllers\Sample')->group(function() {
-    Route::get('/sample', 'SampleController@index');
-    Route::get('/sample/other', 'SampleController@other');
+Route::namespace('App\Http\Controllers\Sample')->group(function () {
+  Route::get('/sample', 'SampleController@index');
+  Route::get('/sample/other', 'SampleController@other');
 });
 
 
@@ -29,12 +29,14 @@ Route::get('/hello/{id}', 'App\Http\Controllers\HelloController@index');
 
 
 Route::get('/hello', 'App\Http\Controllers\HelloController@index')
-    ->middleware('MyMW')->name("hello");
+  ->middleware('MyMW')->name("hello");
 
-Route::get('/hello/json', 'App\Http\Controllers\HelloController@json');
-Route::get('/hello/json/{id}', 'App\Http\Controllers\HelloController@json');
-
-
+Route::middleware(['cors'])->group(
+  function () {
+    Route::get('/hello/json', 'App\Http\Controllers\HelloController@json');
+    Route::get('/hello/json/{id}', 'App\Http\Controllers\HelloController@json');
+  }
+);
 
 Route::get('/hello/{id}', 'App\Http\Controllers\HelloController@index')
-    ->middleware(App\Http\Middleware\MyMiddleware::class);
+  ->middleware(App\Http\Middleware\MyMiddleware::class);
